@@ -2,6 +2,7 @@
 # @Time    : 2017/11/8 16:22
 # @File    : decorator.py
 import functools
+from simplejson import JSONDecodeError
 
 
 def debug_decorator(symbol, size):
@@ -23,3 +24,19 @@ def debug_decorator(symbol, size):
 
     return wrap
 
+
+def json_decr(**kwwargs):
+    default = kwwargs.pop('default', {})
+
+    def wrapper(func):
+        @functools.wraps(func)
+        def wrap(*sub, **kwargs):
+            try:
+                ret = func(*sub, **kwargs)
+            except JSONDecodeError as e:
+                print e.message
+                return default
+            else:
+                return ret
+        return wrap
+    return wrapper
