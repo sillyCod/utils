@@ -26,6 +26,11 @@ def debug_decorator(symbol, size):
 
 
 def json_decr(**kwwargs):
+    """
+    decorator for dealing with JsonDecodeError.
+    :param kwwargs:
+    :return:
+    """
     default = kwwargs.pop('default', {})
 
     def wrapper(func):
