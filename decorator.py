@@ -17,7 +17,7 @@ def debug_decorator(symbol, size):
         def wrapper(*sub, **kwargs):
             if not (isinstance(symbol, str) and isinstance(size, int)):
                 raise TypeError("Please make sure the symbol str and size int")
-            print symbol * size
+            print(symbol * size)
             return func(*sub, **kwargs)
 
         return wrapper
@@ -39,9 +39,13 @@ def json_decr(**kwwargs):
             try:
                 ret = func(*sub, **kwargs)
             except JSONDecodeError as e:
-                print e.message
+                print(e.message)
                 return default
             else:
                 return ret
         return wrap
     return wrapper
+
+
+def ret_verify():
+    pass
